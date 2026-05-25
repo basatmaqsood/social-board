@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaGithub, FaLinkedin, FaGlobe, FaEnvelope, FaWhatsapp, FaFacebook, FaInstagram, FaMedium, FaNpm, FaMapMarkerAlt, FaFileDownload } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaGlobe, FaEnvelope, FaWhatsapp, FaFacebook, FaInstagram, FaMedium, FaNpm, FaMapMarkerAlt, FaFileDownload, FaPlay } from 'react-icons/fa';
 import AnimatedBackground from './AnimatedBackground';
 import './index.css';
 
@@ -10,6 +10,14 @@ const links = [
     url: 'http://www.basatmaqsood.com',
     icon: <FaGlobe />,
     color: 'linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%)'
+  },
+      
+  {
+    id: 4,
+    title: 'Email Me',
+    url: 'mailto:me@basatmaqsood.com',
+    icon: <FaEnvelope />,
+    color: 'linear-gradient(135deg, #ea4335 0%, #c5221f 100%)'
   },
   {
     id: 2,
@@ -25,13 +33,7 @@ const links = [
     icon: <FaLinkedin />,
     color: 'linear-gradient(135deg, #0077b5 0%, #005e93 100%)'
   },
-  {
-    id: 4,
-    title: 'Email Me',
-    url: 'mailto:me@basatmaqsood.com',
-    icon: <FaEnvelope />,
-    color: 'linear-gradient(135deg, #ea4335 0%, #c5221f 100%)'
-  },
+
   {
     id: 5,
     title: 'WhatsApp',
@@ -40,12 +42,21 @@ const links = [
     color: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)'
   },
   {
-    id: 6,
-    title: 'NPM',
-    url: 'https://www.npmjs.com/~basat-maqsood',
-    icon: <FaNpm />,
-    color: 'linear-gradient(135deg, #CB3837 0%, #A22E2B 100%)'
+    id: 8,
+    title: 'Instagram',
+    url: 'https://www.instagram.com/basatmaqsood',
+    icon: <FaInstagram />,
+    color: 'linear-gradient(135deg, #f09433 0%, #bc1888 100%)'
   },
+
+  {
+    id: 9,
+    title: 'Facebook',
+    url: 'https://www.facebook.com/itzbasatmaqsood',
+    icon: <FaFacebook />,
+    color: 'linear-gradient(135deg, #1877F2 0%, #145DBF 100%)'
+  },
+  
   {
     id: 7,
     title: 'Medium',
@@ -54,23 +65,19 @@ const links = [
     color: 'linear-gradient(135deg, #000000 0%, #333333 100%)'
   },
   {
-    id: 8,
-    title: 'Facebook',
-    url: 'https://www.facebook.com/itzbasatmaqsood',
-    icon: <FaFacebook />,
-    color: 'linear-gradient(135deg, #1877F2 0%, #145DBF 100%)'
+    id: 6,
+    title: 'NPM',
+    url: 'https://www.npmjs.com/~basat-maqsood',
+    icon: <FaNpm />,
+    color: 'linear-gradient(135deg, #CB3837 0%, #A22E2B 100%)'
   },
-  {
-    id: 9,
-    title: 'Instagram',
-    url: 'https://www.instagram.com/basatmaqsood',
-    icon: <FaInstagram />,
-    color: 'linear-gradient(135deg, #f09433 0%, #bc1888 100%)'
-  }
+
+  
 ];
 
 function App() {
   const [mounted, setMounted] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -109,6 +116,18 @@ function App() {
         </header>
 
         <section className="links-section">
+          <button
+            onClick={() => setIsVideoModalOpen(true)}
+            className="link-card highlight-card"
+            style={{ '--animation-order': 0 }}
+          >
+            <div className="link-icon-wrapper" style={{ background: 'linear-gradient(135deg, #FF0000 0%, #CC0000 100%)' }}>
+              <FaPlay style={{ marginLeft: '4px' }} />
+            </div>
+            <span className="link-title">Watch My Intro</span>
+            <div className="link-arrow">↗</div>
+          </button>
+
           {links.map((link, index) => (
             <a
               key={link.id}
@@ -117,7 +136,7 @@ function App() {
               rel="noopener noreferrer"
               className="link-card"
               style={{
-                '--animation-order': index,
+                '--animation-order': index + 1,
                 '--brand-bg': link.color
               }}
             >
@@ -134,6 +153,22 @@ function App() {
           <p>Made with ❤️ by Basat Maqsood</p>
         </footer>
       </main>
+
+      {isVideoModalOpen && (
+        <div className="modal-overlay" onClick={() => setIsVideoModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setIsVideoModalOpen(false)}>&times;</button>
+            <div className="video-container">
+              <iframe
+                src="https://www.youtube.com/embed/CrFaIOVH_nc?autoplay=1"
+                title="Intro Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
