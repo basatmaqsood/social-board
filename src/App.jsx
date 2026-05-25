@@ -160,7 +160,7 @@ function App() {
             <button className="modal-close" onClick={() => setIsVideoModalOpen(false)}>&times;</button>
             <div className="video-container">
               <iframe
-                src="https://www.youtube.com/embed/CrFaIOVH_nc?autoplay=1"
+                src="https://www.youtube-nocookie.com/embed/CrFaIOVH_nc?autoplay=1"
                 title="Intro Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
